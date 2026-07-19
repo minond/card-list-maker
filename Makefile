@@ -3,7 +3,7 @@
 default: run compile view
 
 run:
-	uv run main.py set:sta set:soa > output.typ
+	uv run main.py set:sta set:soa set:fca > output.typ
 
 compile:
 	typst compile output.typ

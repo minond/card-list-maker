@@ -55,7 +55,7 @@ def main(queries: list[str]):
         title = card["name"]
         if card["lang"] != "en" and "printed_name" in card:
             title = f"{title} ({card['printed_name']})"
-        output.append(f"- [ ] \#{card['collector_number']} {title}")
+        output.append(f"- [ ] \\#{card['collector_number']} {title}")
 
     print(f"""
 #import "@preview/cheq:0.4.0": checklist
