@@ -54,10 +54,10 @@ def main(queries: list[str]):
             output.append(heading)
         title = card["name"]
         if "flavor_name" in card:
-            title = f"{card['flavor_name']} (_{title}_)"
+            title = f"{card['flavor_name']} #text(gray)[({title})]"
         if card["lang"] != "en" and "printed_name" in card:
-            title = f"{title} ({card['printed_name']})"
-        output.append(f"- [ ] \\#{card['collector_number']} {title}")
+            title = f"{title} #text(gray)[({card['printed_name']})]"
+        output.append(f"- [ ] #text(gray)[\\#{str(card['collector_number']).zfill(3)}] {title}")
 
     print(f"""
 #import "@preview/cheq:0.4.0": checklist
