@@ -53,6 +53,8 @@ def main(queries: list[str]):
 """
             output.append(heading)
         title = card["name"]
+        if "flavor_name" in card:
+            title = f"{card['flavor_name']} (_{title}_)"
         if card["lang"] != "en" and "printed_name" in card:
             title = f"{title} ({card['printed_name']})"
         output.append(f"- [ ] \\#{card['collector_number']} {title}")
