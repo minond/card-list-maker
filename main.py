@@ -32,14 +32,24 @@ def main(queries: list[str]):
             printed_sets.add(set_name)
             if len(printed_sets) > 1:
                 output.append("\n#pagebreak()\n")
+
+            set_title = f"{set_name} ({set_number})"
             heading = f"""#counter(page).update(1)
+#set page(footer: context [
+  {set_title}
+  #h(1fr)
+  #counter(page).display(
+    "1 / 1",
+    both: true,
+  )
+])
 #place(
     top + center,
     scope: "parent",
     float: true,
-    text(1.4em, weight: "bold")[
-        {set_name} ({set_number})
-    ],
+    pad(bottom: 2em, text(1.4em, weight: "bold")[
+        {set_title}
+    ]),
 )
 """
             output.append(heading)
@@ -51,7 +61,7 @@ def main(queries: list[str]):
     print(f"""
 #import "@preview/cheq:0.4.0": checklist
 
-#set page(columns: 2, numbering: "1")
+#set page(columns: 2)
 #set text(font: "IBM Plex Mono", size: 8pt)
 
 #show: checklist
