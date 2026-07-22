@@ -52,13 +52,17 @@ def main(queries: list[str]):
 )
 """
             output.append(heading)
+
         title = card["name"]
+        prices = card.get("prices", {})
+        price = prices.get("usd") or prices.get("usd_foil")
+
         if card.get("flavor_name"):
             title = f"{card['flavor_name']} #text(gray)[({title})]"
         if card["lang"] != "en" and card.get("printed_name"):
             title = f"{title} #text(gray)[({card['printed_name']})]"
-        if card.get("prices", {}).get("usd"):
-            title = f"{title} #text(gray)[(\\${card['prices']['usd']})]"
+        if price:
+            title = f"{title} #text(gray)[(\\${price})]"
         output.append(f"- [ ] #text(gray)[\\#{str(card['collector_number']).zfill(3)}] {title}")
 
     print(f"""
