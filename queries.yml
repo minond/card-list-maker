@@ -1,0 +1,23 @@
+# Strixhaven Mystical Archive (sta)
+- "game:paper set:sta"
+
+# Secrets of Strixhaven Mystical Archive (soa)
+- "game:paper set:soa"
+
+# Final Fantasy: Through the Ages (fca)
+- "game:paper set:fca"
+
+# Aetherdrift (Rude Riders) (dft)
+- "game:paper set:dft cn>=333 cn=<346"
+
+# Aetherdrift (Borderless First Place Rude Riders Foils) (dft)
+- "game:paper set:dft cn>=532 cn<=545"
+
+# Showcase: Strixhaven (sld)
+- "game:paper set:sld cn=>268 cn<=273"
+
+# Return to the Mystical Archive (sld)
+- "game:paper set:sld ((cn=>2387 cn<=2391) OR cn:7080)"
+
+# Aether Drifters (sld)
+- "game:paper set:sld cn=>1964 cn<=1969"

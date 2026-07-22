@@ -1,7 +1,13 @@
 import requests
-import sys
+import yaml
+import argparse
 from pprint import pprint
 from urllib.parse import quote
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("queries", nargs="*")
+parser.add_argument("-f", "--queries-file")
 
 
 def typst_quote(value: str) -> str:
@@ -67,7 +73,9 @@ def main(queries: list[str]):
             title = f"{title} #text(gray)[({card['printed_name']})]"
         if price:
             title = f"{title} #text(gray)[(\\${price})]"
-        output.append(f"- [ ] #text(gray)[\\#{str(card['collector_number']).zfill(4)}] {title}")
+        output.append(
+            f"- [ ] #text(gray)[\\#{str(card['collector_number']).zfill(4)}] {title}"
+        )
 
     print(f"""
 #import "@preview/cheq:0.4.0": checklist
@@ -81,4 +89,11 @@ def main(queries: list[str]):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    args = parser.parse_args()
+    queries = args.queries
+
+    if args.queries_file:
+        with open(args.queries_file) as f:
+            queries = queries + yaml.safe_load(f)
+
+    main(queries)

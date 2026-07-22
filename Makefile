@@ -1,19 +1,18 @@
-.PHONY: default run compile view
+.PHONY: default run view clean
 
-queries := \
-		   "set:sta" \
-		   "set:soa" \
-		   "set:fca" \
-		   "set:dft cn>=333 cn=<346" \
-		   "set:dft cn>=532 cn<=545"
-
-default: run compile view
+default: view
 
 run:
-	uv run main.py $(queries) > output.typ
+	uv run main.py -f queries.yml
 
-compile:
+output.typ: main.py queries.yml
+	uv run main.py -f queries.yml > output.typ
+
+output.pdf: output.typ
 	typst compile output.typ
 
-view:
+view: output.pdf
 	xdg-open output.pdf
+
+clean:
+	rm output.typ output.pdf
