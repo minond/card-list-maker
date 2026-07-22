@@ -1,12 +1,14 @@
 .PHONY: default run view clean
 
+RUN := uv run main.py -f queries.yml
+
 default: view
 
 run:
-	uv run main.py -f queries.yml
+	$(RUN)
 
 output.typ: main.py queries.yml
-	uv run main.py -f queries.yml > output.typ
+	$(RUN) > output.typ
 
 output.pdf: output.typ
 	typst compile output.typ
@@ -15,4 +17,4 @@ view: output.pdf
 	xdg-open output.pdf
 
 clean:
-	rm output.typ output.pdf
+	rm -f output.typ output.pdf
