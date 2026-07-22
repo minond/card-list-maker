@@ -4,6 +4,10 @@ from pprint import pprint
 from urllib.parse import quote
 
 
+def typst_quote(value: str) -> str:
+    return value.replace("//", "\\/\\/")
+
+
 def get_cards(query: str) -> list:
     def gen_url(page: int) -> str:
         return f"https://api.scryfall.com/cards/search?q={quote(query)}&order=set&unique=prints&page={page}"
@@ -63,7 +67,7 @@ def main(queries: list[str]):
             title = f"{title} #text(gray)[({card['printed_name']})]"
         if price:
             title = f"{title} #text(gray)[(\\${price})]"
-        output.append(f"- [ ] #text(gray)[\\#{str(card['collector_number']).zfill(3)}] {title}")
+        output.append(f"- [ ] #text(gray)[\\#{str(card['collector_number']).zfill(4)}] {title}")
 
     print(f"""
 #import "@preview/cheq:0.4.0": checklist
@@ -73,7 +77,7 @@ def main(queries: list[str]):
 
 #show: checklist
 
-{"\n".join(output)}""")
+{typst_quote("\n".join(output))}""")
 
 
 if __name__ == "__main__":
