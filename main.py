@@ -36,6 +36,9 @@ def main(queries: list[str]):
     cards = [card for query in queries for card in get_cards(query)]
     printed_sets = set()
     for card in cards:
+        if not card["nonfoil"]:
+            continue
+
         set_name = card["set_name"]
         set_number = card["set"]
         if set_name not in printed_sets:
